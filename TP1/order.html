@@ -5,6 +5,49 @@
   <title>OnlineShop - Commande</title>
 </head>
 <body>
-<!-- TODO -->
+    <h1>Title body</h1>
+    <header>
+      <h1>Title header</h1>
+      <a href="index.html"><img src="assets/img/logo.svg"></a>
+      <nav>
+        <h1>Title nav</h1>
+        <a href="index.html">Accueil</a> |
+        <a href="products.html">Produits</a> |
+        <a href="contact.html">Contact</a> |
+        <a href="shopping-cart.html">Panier</a>
+      </nav>
+    </header>
+    <main>
+      <h1>Title Main</h1>
+      <article>
+        <h1>Identification</h1>
+        <form action="confirmation.html">
+            <p>Complétez le formulaire. Les champs marqué par * sont obligatoires</p>
+            <fieldset>
+              <legend>Contact</legend>
+                <label for="prenom">Prénom<em>*</em></label>
+                <input id="first-name" placeholder="Prénom" autofocus="" required=""><br>
+                <label for="nom">Nom<em>*</em></label>
+                <input id="last-name" placeholder="Nom" autofocus="" required=""><br>
+                <label for="email">Adresse courriel<em>*</em></label>
+                <input id="email" type="email" placeholder="prenom.nom@polymtl.ca" required="" pattern="[a-zA-Z]*.[a-zA-Z]*@*.*"><br>
+                <label for="telephone">Numéro de téléphone<em>*</em></label>
+                <input id="phone" type="tel" placeholder="xxxxxxxxxx" required="" pattern="[0-9]{10}"><br>                
+            </fieldset>
+            <fieldset>
+              <legend>Paiement</legend>
+                <label for="credit-card">Numéro de carte de crédit<em>*</em></label>
+                <input id="credit-card" type="tel" placeholder="xxxx-xxxx-xxxx-xxxx" pattern="([0-9]{4}-){3}[0-9]{4}" required=""><br>
+                <label for="credit-card-expiry">Date d’expiration de la carte<em>*</em></label>
+                <input id="credit-card-expiry" type="date"  min="2018-09-01" required=""><br>
+            </fieldset>
+              <input type="submit" value="Payer">
+          </form>
+      </article>
+    </main>
+    <footer>
+        <h1>Title Footer</h1>
+        <p>© Sabi - Said Hmani (1228329) & Bilal Itani (1743175)</p>
+    </footer>
 </body>
 </html>
