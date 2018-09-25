@@ -3,46 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <title>OnlineShop - Commande</title>
-</head>
 <body>
-    <header>
-      <a href="index.html"><img src="assets/img/logo.svg" alt="logo"></a>
-      <nav>
-        <a href="index.html">Accueil</a>
-        <a href="products.html">Produits</a>
-        <a href="contact.html">Contact</a>
-        <a href="shopping-cart.html">Panier</a>
-      </nav>
-    </header>
-    <main>
-      <article>
-        <h1>Identification</h1>
-        <form action="confirmation.html">
-            <p>Complétez le formulaire. Les champs marqué par * sont obligatoires</p>
-            <fieldset>
-              <legend>Contact</legend>
-                <label for="prenom">Prénom<em>*</em></label>
-                <input id="first-name" placeholder="Prénom" autofocus="" required=""><br>
-                <label for="nom">Nom<em>*</em></label>
-                <input id="last-name" placeholder="Nom" autofocus="" required=""><br>
-                <label for="email">Adresse courriel<em>*</em></label>
-                <input id="email" type="email" placeholder="prenom.nom@polymtl.ca" required="" pattern="[a-zA-Z]*.[a-zA-Z]*@*.*"><br>
-                <label for="telephone">Numéro de téléphone<em>*</em></label>
-                <input id="phone" type="tel" placeholder="xxxxxxxxxx" required="" pattern="[0-9]{10}"><br>                
-            </fieldset>
-            <fieldset>
-              <legend>Paiement</legend>
-                <label for="credit-card">Numéro de carte de crédit<em>*</em></label>
-                <input id="credit-card" type="tel" placeholder="xxxx-xxxx-xxxx-xxxx" pattern="([0-9]{4}-){3}[0-9]{4}" required=""><br>
-                <label for="credit-card-expiry">Date d’expiration de la carte<em>*</em></label>
-                <input id="credit-card-expiry" type="date"  min="2018-09-01" required=""><br>
-            </fieldset>
-              <input type="submit" value="Payer">
-          </form>
-      </article>
-    </main>
-    <footer>
-        <p>© Sabi - Said Hmani (1228329) & Bilal Itani (1743175)</p>
-    </footer>
+  <header>
+    <a href="./index.html">
+      <img alt="logo" src="./assets/img/logo.svg" title="Accueil">
+    </a>
+    <nav>
+      <ul>
+        <li><a href="./index.html">Accueil</a></li>
+        <li><a href="./products.html">Produits</a></li>
+        <li><a href="./contact.html">Contact</a></li>
+        <li><a href="./shopping-cart.html">Panier</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h1>Commande</h1>
+      <form id="order-form" action="./confirmation.html" method="post">
+        <section>
+          <h2>Contact</h2>
+          <label for="first-name">Prénom</label>
+          <input id="first-name" name="first-name" type="text" placeholder="Prénom" required>
+
+          <label for="last-name">Nom</label>
+          <input id="last-name" name="last-name" type="text" placeholder="Nom" required>
+
+          <label for="email">Adresse courriel</label>
+          <input id="email" name="email" type="email" placeholder="Adresse courriel" required>
+
+          <label for="phone">Téléphone</label>
+          <input id="phone" name="phone" type="tel" placeholder="###-###-####" required>
+        </section>
+        <section>
+          <h2>Paiement</h2>
+          <label for="credit-card">Numéro de carte de crédit</label>
+          <input id="credit-card" name="credit-card" type="text" placeholder="•••• •••• •••• ••••" required>
+
+          <label for="credit-card-expiry">Expiration (mm/aa)</label>
+          <input id="credit-card-expiry" name="credit-card-expiry" type="text" placeholder="mm/aa" required>
+        </section>
+        <button type="submit">Payer</button>
+      </form>
+    </article>
+  </main>
+  <footer>
+    <p>Par Antoine Béland et Konstantinos Lambrou-Latreille</p>
+  </footer>
 </body>
 </html>
