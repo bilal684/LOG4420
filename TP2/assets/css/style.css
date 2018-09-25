@@ -1,23 +1,117 @@
+body
+{
+    margin:0px;
+    font-family: "Arial";
+}
+
 main
 {
     max-width: 1200px;
     padding-left: 20px;
     padding-right: 20px;
+    margin:auto;
+    min-height: calc(100vh - 130px);
+    overflow:auto;
 }
+
 
 header
 {
     height: 60px;
     padding-left: 20px;
     padding-right: 20px;
+    width: 100%;
+    background-color: #14597f;
+    box-sizing: border-box;
+    border-bottom:1px solid;
+    border-bottom-color: #0b2d3d;
+}
+
+.headerContent
+{
+    margin:auto;
+    max-width: 1200px;
+}
+
+.headerContent > a > img
+{
+   float: left;
+   width:auto; /* you can use % */
+   height: 50px;
+   padding-top:5px;
+   padding-bottom:5px;
+}
+
+.headerContent > nav > ul > li
+{
+    display: inline-block;
+    margin-left:5px;
+}
+
+.headerContent > nav > ul > li > .active
+{
+    display: inline-block;
+    background-color : #1fb5e9;
+    padding:10px;
+    border-radius: 4px;
+}
+
+.headerContent > nav > ul
+{
+    list-style:none;
+    list-style-type: none;
+    margin:0px;
+    padding:0px;
+}
+
+.headerContent > nav
+{
+    padding-top:10px;
+}
+
+.headerContent > nav > ul > li > a
+{
+    color: #fff;
+    text-decoration: none;
+}
+
+.headerContent > nav > ul > li.active > a {
+    padding: 10px 15px;
+    background-color: #1fb5e9;
+    border-radius: 4px;
+}
+
+.headerContent > nav > ul > li > .shopping-cart
+{
+    color: #14597f;
+    position: relative;
+}
+
+.shopping-cart > .count {
+    position: absolute;
+    top:15px;
+    left:32px;
+    font-size: 0.8em;
+    color: white;
+    background-color: #d9534f;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 18px;
+    border-radius: 30px;
+}
+
+.headerContent > nav
+{
+    float : right;
 }
 
 footer
 {
     height: 70px;
-}
-
-p
-{
-    font-family: "Arial";
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #eee;
+    border-top: 1px solid #ccc;
 }
