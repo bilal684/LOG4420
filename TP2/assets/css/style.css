@@ -1,0 +1,23 @@
+main
+{
+    max-width: 1200px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+header
+{
+    height: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+footer
+{
+    height: 70px;
+}
+
+p
+{
+    font-family: "Arial";
+}
