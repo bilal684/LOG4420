@@ -12,18 +12,14 @@ main
     margin:auto;
     min-height: calc(100vh - 130px);
     overflow:auto;
-}
-
-main article
-{
-    position:relative;
+    display:flex;
+    flex-wrap:wrap;
 }
 
 main article img
 {
-    position : absolute;
-    top:-30px;
-    left:600px;
+    margin-top:-75px;
+    float:right;
     max-width: 40%;
 }
 
