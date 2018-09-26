@@ -10,7 +10,7 @@ main
     padding-left: 20px;
     padding-right: 20px;
     margin:auto;
-    min-height: calc(100vh - 130px);
+    min-height: calc(100vh - 131px);
     overflow:auto;
     display:flex;
     flex-wrap:wrap;
@@ -26,18 +26,68 @@ main article img
 .btn
 {
     padding: 10px;
-    font-size: 0.8em;
+    font-size: 0.9em;
     text-decoration: none;
     background-color: #14597f;
     border: 1px solid #0b2d3d;
     border-radius: 4px;
-    color: #fff;
+    color: #ffffff;
     transition: all ease-out 0.2s;
 }
 
 .btn:hover {
     text-decoration: none;
     background-color: #1fb5e9;
+}
+
+.buttons
+{
+    display:flex;
+    border: 1px solid #999999;
+    border-radius: 4px;
+    padding: 0;
+    flex-wrap:wrap;
+}
+
+.buttons button {
+    color: #444444;
+    background-color: #ffffff;
+    text-align: left;
+    text-decoration: none;
+    padding: 10px;
+    border: none;
+    box-sizing: border-box;
+    transition: all ease-out 0.2s;
+    flex: 1;
+    flex-basis:100%;
+    outline: none;
+}
+
+.buttons button:not(:last-of-type)
+{
+    border-bottom: 1px solid #999999;
+}
+
+.buttons button:hover{
+    text-decoration: none;
+    background-color: #f3f3f3;
+}
+
+.buttons .selected
+{
+    background-color: #ddf2fb;
+}
+
+.ProductMenu
+{
+    padding-right: 20px;
+    box-sizing: border-box;
+    flex-basis: 25%;
+}
+
+.ProductMenu h2
+{
+    font-size:18px;
 }
 
 header
@@ -94,25 +144,25 @@ header
     padding-top:10px;
 }
 
-.headerContent > nav > ul > li > a
+.headerContent nav ul li a
 {
-    color: #fff;
+    color: #ffffff;
     text-decoration: none;
 }
 
-.headerContent > nav > ul > li.active > a {
+.headerContent nav ul li.active a {
     padding: 10px 15px;
     background-color: #1fb5e9;
     border-radius: 4px;
 }
 
-.headerContent > nav > ul > li > .shopping-cart
+.headerContent nav ul li .shopping-cart
 {
     color: #14597f;
     position: relative;
 }
 
-.shopping-cart > .count {
+.shopping-cart .count {
     position: absolute;
     top:15px;
     left:32px;
@@ -126,7 +176,7 @@ header
     border-radius: 30px;
 }
 
-.headerContent > nav
+.headerContent nav
 {
     float : right;
 }
