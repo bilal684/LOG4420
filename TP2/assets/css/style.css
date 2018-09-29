@@ -317,3 +317,58 @@ main > .order
 {
 	float: right
 }
+
+/*Product.html*/
+
+.productinformation section p
+{
+    text-align:justify;
+}
+
+
+.productinformation section h2
+{
+    font-size:1.2em;
+}
+
+.description
+{
+    margin-top:100px;
+}
+
+.specs
+{
+    padding-bottom:10px;
+    border-bottom: 1px dashed #999999;
+    margin-bottom:25px;
+}
+
+.addtocartform
+{
+    float:right;
+}
+
+.quantityinput
+{
+    width:40px;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-right:5px;
+    padding-left:5px;
+    border-radius:4px;
+    border:1px solid #999999;
+}
+
+.quantityinput::-webkit-inner-spin-button, 
+.quantityinput::-webkit-outer-spin-button {  
+   opacity: 1;
+}
+
+.quantityinput:focus{
+    outline: none;
+}
+
+#quantitylabel
+{
+    display:inline;
+}
