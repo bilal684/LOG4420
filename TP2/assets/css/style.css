@@ -374,3 +374,37 @@ main > .order
 {
     display:inline;
 }
+
+/*Contact.html*/
+
+.contactinfo
+{
+    display:flex;
+    flex-wrap:wrap;
+    border: 1px solid #999999;
+    border-radius: 4px;
+    margin-top:30px;
+}
+
+.contactinfo a
+{
+    text-decoration: none;
+    color:rgb(108, 156, 200);
+}
+
+.phonecontact, .addresscontact, .emailcontact
+{
+    margin-top:25px;
+    width: calc(100% * (1/3));
+    text-align:center;
+}
+
+.fa-mobile-alt, .fa-envelope
+{
+    margin-bottom:15px;
+}
+
+.address
+{
+    font-style:italic;
+}
