@@ -39,6 +39,7 @@ article
     border-radius: 4px;
     color: #ffffff;
     transition: all ease-out 0.2s;
+    cursor:pointer;
 }
 
 .btn:hover {
