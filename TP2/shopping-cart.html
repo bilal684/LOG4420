@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>OnlineShop - Panier</title>
   <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 <body>
@@ -31,7 +32,7 @@
     </div>
   </header>
   <main>
-    <article>
+    <article class = "width100">
       <h1>Panier</h1>
       <table>
         <thead>
@@ -45,31 +46,60 @@
         </thead>
         <tbody>
           <tr>
-            <td><button>X</button></td>
+            <!-- Style (X) tiré du site : https://fontawesome.com/v4.7.0/icon/times-->
+            <td><button><i class="fa fa-times" aria-hidden="true"></i></button></td>
             <td><a href="./product.html">Console Wii</a></td>
             <td>199,99&thinsp;$</td>
-            <td><button>-</button> 1 <button>+</button></td>
+            <!-- Style (-) tiré du site : https://fontawesome.com/v4.7.0/icon/minus-->
+            <!-- Style (+) tiré du site : https://fontawesome.com/v4.7.0/icon/plus-->
+            <td>
+              <div class = "qty-row">
+                <div class = "qty-col"><button><i class="fa fa-minus" aria-hidden="true"></i></button></div>
+                <div class = "qty-col">1</div>
+                <div class = "qty-col"><button><i class="fa fa-plus" aria-hidden="true"></i></button></div>
+              </div>
+            </td>
             <td>199,99&thinsp;$</td>
           </tr>
           <tr>
-            <td><button>X</button></td>
+            <!-- Style (X) tiré du site : https://fontawesome.com/v4.7.0/icon/times-->
+            <td><button><i class="fa fa-times" aria-hidden="true"></i></button></td>
             <td><a href="./product.html">Manette Xbox 360</a></td>
             <td>29,99&thinsp;$</td>
-            <td><button>-</button> 2 <button>+</button></td>
+            <!-- Style (-) tiré du site : https://fontawesome.com/v4.7.0/icon/minus-->
+            <!-- Style (+) tiré du site : https://fontawesome.com/v4.7.0/icon/plus-->
+            <td>
+              <div class = "qty-row">
+                <div class = "qty-col"><button><i class="fa fa-minus" aria-hidden="true"></i></button></div>
+                <div class = "qty-col">2</div>
+                <div class = "qty-col"><button><i class="fa fa-plus" aria-hidden="true"></i></button></div>
+              </div>
+            </td>
             <td>59,98&thinsp;$</td>
           </tr>
           <tr>
-            <td><button>X</button></td>
+            <!-- Style (X) tiré du site : https://fontawesome.com/v4.7.0/icon/times-->
+            <td><button><i class="fa fa-times" aria-hidden="true"></i></button></td>
             <td><a href="./product.html">Moniteur 19"</a></td>
             <td>149,99&thinsp;$</td>
-            <td><button>-</button> 3 <button>+</button></td>
+            <!-- Style (-) tiré du site : https://fontawesome.com/v4.7.0/icon/minus-->
+            <!-- Style (+) tiré du site : https://fontawesome.com/v4.7.0/icon/plus-->
+            <td>
+              <div class = "qty-row">
+                <div class = "qty-col"><button><i class="fa fa-minus" aria-hidden="true"></i></button></div>
+                <div class = "qty-col">3</div>
+                <div class = "qty-col"><button><i class="fa fa-plus" aria-hidden="true"></i></button></div>
+              </div>
+            </td>
             <td>449,97&thinsp;$</td>
           </tr>
         </tbody>
       </table>
-      <p>Total: <strong>704,94&thinsp;$</strong></p>
-      <button>Vider le panier</button>
-      <a href="./order.html">Commander</a>
+      <p class = "total-price">Total: <strong>704,94&thinsp;$</strong></p>
+      <!-- Style (Ô) tiré du site : https://fontawesome.com/v4.7.0/icon/trash-o-->
+      <button class = "btn"><i class="fa fa-trash-o" aria-hidden="true"></i> Vider le panier</button>
+      <!-- Style (>>) tiré du site : https://fontawesome.com/v4.7.0/icon/angle-double-right-->
+      <a class = "align-right btn" href="./order.html">Commander <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
     </article>
   </main>
   <footer>
