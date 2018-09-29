@@ -175,6 +175,7 @@ footer > p
     flex: 1;
     flex-basis:100%;
     outline: none;
+    cursor: pointer;
 }
 
 .buttons button:not(:last-of-type)
