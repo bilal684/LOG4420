@@ -5,5 +5,52 @@ const utils = {
         } else {
           $('.count').text(localStorage.getItem('cartQuantity'))
         }
+    },
+
+    sortPriceAscending: (data) => {
+        data.sort(function(a,b) {
+            return a.price - b.price
+        })
+    },
+
+    sortPriceDescending: (data) => {
+        data.sort(function(a,b) {
+            return b.price - a.price
+        })
+    },
+
+    sortNameAscending: (data) => {
+        data.sort(function(a,b) {
+            if(a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+            if(a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+            return 0;
+        })
+    },
+
+    sortNameDescending: (data) => {
+        data.sort(function(a,b) {
+            if(b.name.toLowerCase() < a.name.toLowerCase()) return -1;
+            if(b.name.toLowerCase() > a.name.toLowerCase()) return 1;
+            return 0;
+        })
+    },
+
+    sortProducts: (basedOn, data) => {
+        if(basedOn === "prix (bas-haut)")
+        {
+            utils.sortPriceAscending(data)
+        }
+        else if (basedOn === "prix (haut-bas)")
+        {
+            utils.sortPriceDescending(data)
+        }
+        else if (basedOn === "nom (a-z)")
+        {
+            utils.sortNameAscending(data)
+        }
+        else
+        {
+            utils.sortNameDescending(data)
+        }
     }
 }
