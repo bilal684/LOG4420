@@ -52,5 +52,29 @@ const utils = {
         {
             utils.sortNameDescending(data)
         }
+    },
+
+    getUrlParams: (name) =>{
+            var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href)
+            if (results === null)
+            {
+                return null
+            }
+            return results[1] || 0;
+    },
+
+    getAllProducts: (products) => {
+        if(!products)
+        {
+            $.ajax({
+                async:false, 
+                url:"./data/products.json",
+                success: function(data){
+                    products = data;
+                }
+            });
+        }
+        return products
     }
+    
 }
