@@ -11,7 +11,6 @@ $(function()
     let elementFound = false;
     for(product of allProducts)
     {
-        console.log(product.id)
         if(product.id == currentPageId)
         {
             elementFound = true
@@ -24,7 +23,48 @@ $(function()
     {
         constructNotFoundProductPage()
     }
+
+    $("form").submit(onFormSubmit)
 })
+
+function onFormSubmit(action)
+{
+    action.preventDefault()
+
+    let cart = []
+    if(localStorage.getItem("cart") !== null)
+    {
+        cart = JSON.parse(localStorage.getItem("cart"))
+    }
+    let currentPageId = utils.getUrlParams('id')
+    let isInCart = false
+    for(article of cart)
+    {
+        if(article.id === currentPageId)
+        {
+            isInCart = true
+            article.quantity = parseInt(article.quantity) + parseInt($("#product-quantity").val())
+        }
+    }
+
+    if(!isInCart)
+    {
+        cart.push({"id": currentPageId, "quantity": $("#product-quantity").val(), "name": $("article h1").text()})
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart))
+    let totalQuantity = localStorage.getItem("cartQuantity")
+    if(totalQuantity === null)
+    {
+        totalQuantity = 0
+    }
+
+    totalQuantity = parseInt(totalQuantity) + parseInt($("#product-quantity").val())
+    localStorage.setItem("cartQuantity", totalQuantity)
+    utils.updateShoppingCartBadge()
+    $("#dialog").addClass("show");
+    setTimeout(function(){ $("#dialog").removeClass("show") }, 5000);
+}
 
 function constructProductPage(product)
 {

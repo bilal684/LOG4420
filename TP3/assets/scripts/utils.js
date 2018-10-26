@@ -4,6 +4,7 @@ const utils = {
           $('.count').hide()
         } else {
           $('.count').text(localStorage.getItem('cartQuantity'))
+          $('.count').show()
         }
     },
 
