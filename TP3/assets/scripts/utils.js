@@ -75,6 +75,10 @@ const utils = {
             });
         }
         return products
-    }
+    },
+
+    isShoppingCartEmpty: () => {
+        return (localStorage.getItem('cartQuantity') === null || localStorage.getItem('cartQuantity') === 0)
+    },
     
 }
