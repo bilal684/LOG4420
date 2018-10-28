@@ -1,6 +1,6 @@
 const utils = {
     updateShoppingCartBadge: () => {
-        if (localStorage.getItem('cartQuantity') === null || localStorage.getItem('cartQuantity') === 0) {
+        if (localStorage.getItem('cartQuantity') == null || localStorage.getItem('cartQuantity') == 0) {
           $('.count').hide()
         } else {
           $('.count').text(localStorage.getItem('cartQuantity'))
@@ -79,7 +79,7 @@ const utils = {
     },
 
     isShoppingCartEmpty: () => {
-        return (localStorage.getItem('cartQuantity') === null || localStorage.getItem('cartQuantity') === 0)
+        return (localStorage.getItem('cartQuantity') == null || localStorage.getItem('cartQuantity') == 0)
     },
     
 }
