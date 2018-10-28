@@ -10,8 +10,8 @@ $(function() {
         $("tbody").empty();
         cartProducts = JSON.parse(localStorage.getItem('cart'));
         allProducts = utils.getAllProducts(allProducts);
-        cartProducts.forEach(function(product) {			
-			allProducts.forEach(function(data) {				
+        cartProducts.forEach(function(product) {
+			allProducts.forEach(function(data) {
 				if (product.id == data.id)
 				{	
                     productVector.push(data);			
@@ -83,14 +83,18 @@ $(function() {
 })
 
 function updateProductQuantity(cartProducts, productLine, value) {
-    let quantity = productLine.find(".quantity").text();
-    quantity = parseInt(quantity) + value;   
+    let quantity = parseInt(productLine.find(".quantity").text());
+    quantity = quantity + value;   
     if (quantity > 0) {     
-        productLine.find(".quantity").text(quantity);            
-        let price = parseFloat(productLine.find(".price").text().replace(',','.'));
-        let totalAmount = parseFloat(productLine.find("#total-amount").text().replace(',','.'));
+        productLine.find(".quantity").text(quantity.toString());            
+        let price = productLine.find(".price").text().replace(',','.');
+        let dollarSymbol = price.slice(-2);
+        price = parseFloat(price.substring(0, price.length - 2));
+        let totalAmount = productLine.find("#total-amount").text().replace(',','.');
+        totalAmount = parseFloat(totalAmount.substring(0, totalAmount.length - 2));
         totalAmount = totalAmount + value * price;
-        productLine.find("#total-amount").text(totalAmount.toFixed(2).toString().replace('.', ','));
+        totalAmount = totalAmount.toFixed(2).toString().replace('.', ',') + dollarSymbol;
+        productLine.find("#total-amount").text(totalAmount);
         totalPrice = parseFloat(totalPrice) + value * price;
         updateTotalPrice(totalPrice);
         let cartQuantity = localStorage.getItem("cartQuantity");
