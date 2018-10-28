@@ -2,7 +2,7 @@ $(function() {
 	var firstName;
 	var lastName;
 	var confirmationNumber;
-	var acc = [];
+	var acc = {};
 	utilities.updateShoppingCartBadge();
     
 	jQuery.validator.addMethod("expirationDate", function(value, element) {
@@ -53,7 +53,9 @@ $(function() {
         if ($("#order-form").valid() == true) {
 			firstName = $("#first-name").val();
 			lastName = $("#last-name").val();			
-			acc.push({"prenom": firstName, "nom": lastName});
+            acc = {
+                prenom : firstName,
+                nom : lastName };
             localStorage.setItem("compte", JSON.stringify(acc));
 			
 			if(localStorage.getItem("confirmation") == null) {
