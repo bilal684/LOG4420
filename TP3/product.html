@@ -6,7 +6,7 @@
   <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
   <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
   <script type="text/javascript" src="./assets/js/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="./assets/scripts/utils.js"></script>
+  <script type="text/javascript" src="./assets/scripts/utilities.js"></script>
   <script type="text/javascript" src="./assets/scripts/product.js"></script>
 </head>
 <body>
@@ -37,7 +37,7 @@
   </header>
   <main>
     <article>
-      <h1>Manette Xbox 360</h1>
+      <h1 id="product-name">Manette Xbox 360</h1>
       <div class="row">
         <div class="col">
           <img id="product-image" alt="Manette Xbox 360" src="./assets/img/xbox-controller.png">
@@ -57,7 +57,7 @@
             </ul>
           </section>
           <hr>
-          <form class="pull-right">
+          <form class="pull-right" id="add-to-cart-form">
             <label for="product-quantity">Quantité:</label>
             <input class="form-control" id="product-quantity" type="number" value="1" min="1">
             <button class="btn" title="Ajouter au panier" type="submit">

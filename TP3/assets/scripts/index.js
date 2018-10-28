@@ -1,3 +1,3 @@
 $(function(){
-    utils.updateShoppingCartBadge()
+    utilities.updateShoppingCartBadge()
 })

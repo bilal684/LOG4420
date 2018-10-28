@@ -3,7 +3,7 @@ $(function() {
 	var lastName;
 	var confirmationNumber;
 	var acc = [];
-    utils.updateShoppingCartBadge();
+	utilities.updateShoppingCartBadge();
     
 	jQuery.validator.addMethod("expirationDate", function(value, element) {
         let regEx = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
@@ -65,7 +65,7 @@ $(function() {
 			
 			localStorage.removeItem("cart");
 			localStorage.removeItem("cartQuantity");
-			utils.updateShoppingCartBadge();
+			utilities.updateShoppingCartBadge();
 		}
 	});
 });

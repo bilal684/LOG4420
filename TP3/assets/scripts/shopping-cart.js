@@ -4,12 +4,12 @@ $(function() {
     var productVector = [];
     var allProducts;
     var cartProducts;
-    if (utils.isShoppingCartEmpty()) {
+    if (utilities.isShoppingCartEmpty()) {
         emptyTableOfProducts();
     } else {
         $("tbody").empty();
         cartProducts = JSON.parse(localStorage.getItem('cart'));
-        allProducts = utils.getAllProducts(allProducts);
+        allProducts = utilities.getAllProducts(allProducts);
         cartProducts.forEach(function(product) {
 			allProducts.forEach(function(data) {
 				if (product.id == data.id)
@@ -18,7 +18,7 @@ $(function() {
 				}
 			});		
         });
-        utils.sortNameAscending(productVector);
+        utilities.sortNameAscending(productVector);
         productVector.forEach(function(product) {
             cartProducts.forEach(function(data) {
                 if (data.id == product.id)	{
@@ -29,7 +29,7 @@ $(function() {
         updateTotalPrice(totalPrice);
         $('.count').text(localStorage.getItem("cartQuantity"));
     }
-    utils.updateShoppingCartBadge();  
+    utilities.updateShoppingCartBadge();  
     updateRemoveQtyBtn();  
     $(".remove-item-button").click(function() {
     
@@ -48,9 +48,9 @@ $(function() {
             totalPrice = parseFloat(totalPrice) - (parseFloat(quantity) * price);
             $(this).parents('tr').remove();
     
-            utils.updateShoppingCartBadge();            
+            utilities.updateShoppingCartBadge();            
     
-            if (utils.isShoppingCartEmpty()) {
+            if (utilities.isShoppingCartEmpty()) {
                 emptyTableOfProducts();
                 localStorage.removeItem("cart");
                 localStorage.removeItem("cartQuantity");
@@ -76,7 +76,7 @@ $(function() {
             emptyTableOfProducts();
             localStorage.removeItem("cart");
             localStorage.removeItem("cartQuantity");
-            utils.updateShoppingCartBadge(); 
+            utilities.updateShoppingCartBadge(); 
         }
     });
     
@@ -103,7 +103,7 @@ function updateProductQuantity(cartProducts, productLine, value) {
         $(".count").text(cartQuantity);
         let prodName = productLine.find("a").text();
         updateProductCart(prodName, quantity, cartProducts)
-        utils.updateShoppingCartBadge(); 
+        utilities.updateShoppingCartBadge(); 
         updateRemoveQtyBtn();           
     }
 }

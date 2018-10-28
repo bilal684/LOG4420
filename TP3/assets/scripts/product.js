@@ -3,10 +3,10 @@ $(function()
     var allProducts
     var currentPageId
 
-    utils.updateShoppingCartBadge()
+    utilities.updateShoppingCartBadge()
 
-    allProducts = utils.getAllProducts(allProducts)
-    currentPageId = utils.getUrlParams('id')
+    allProducts = utilities.getAllProducts(allProducts)
+    currentPageId = utilities.getUrlParams('id')
 
     let elementFound = false;
     for(product of allProducts)
@@ -31,25 +31,30 @@ function onFormSubmit(action)
 {
     action.preventDefault()
 
+    let productQty = parseInt($("#product-quantity").val())
+    /*if(isNaN(productQty))
+    {
+        productQty = 1
+    }*/
     let cart = []
     if(localStorage.getItem("cart") !== null)
     {
         cart = JSON.parse(localStorage.getItem("cart"))
     }
-    let currentPageId = utils.getUrlParams('id')
+    let currentPageId = utilities.getUrlParams('id')
     let isInCart = false
     for(article of cart)
     {
         if(article.id === currentPageId)
         {
             isInCart = true
-            article.quantity = parseInt(article.quantity) + parseInt($("#product-quantity").val())
+            article.quantity = parseInt(article.quantity) + productQty
         }
     }
 
     if(!isInCart)
     {
-        cart.push({"id": currentPageId, "quantity": $("#product-quantity").val(), "name": $("article h1").text()})
+        cart.push({"id": currentPageId, "quantity": productQty, "name": $("article h1").text()})
     }
 
     localStorage.setItem("cart", JSON.stringify(cart))
@@ -59,9 +64,9 @@ function onFormSubmit(action)
         totalQuantity = 0
     }
 
-    totalQuantity = parseInt(totalQuantity) + parseInt($("#product-quantity").val())
+    totalQuantity = parseInt(totalQuantity) + productQty
     localStorage.setItem("cartQuantity", totalQuantity)
-    utils.updateShoppingCartBadge()
+    utilities.updateShoppingCartBadge()
     $("#dialog").addClass("show");
     setTimeout(function(){ $("#dialog").removeClass("show") }, 5000);
 }

@@ -1,6 +1,6 @@
 $(function()
 {
-    utils.updateShoppingCartBadge()
+    utilities.updateShoppingCartBadge()
 
     var allProducts
     var currentProducts
@@ -12,7 +12,7 @@ $(function()
         success: function(data)
         {
             allProducts = data
-            utils.sortProducts($("#product-criteria .selected").text().toLowerCase(), data)
+            utilities.sortProducts($("#product-criteria .selected").text().toLowerCase(), data)
             appendProductToList(data)
             $("products-count").text(data.length + " produits")
         }
@@ -65,7 +65,7 @@ $(function()
             })
         }
 
-        utils.sortProducts($("#product-criteria .selected").text().toLowerCase(), currentProducts)
+        utilities.sortProducts($("#product-criteria .selected").text().toLowerCase(), currentProducts)
         appendProductToList(currentProducts)
         $("#products-count").text(currentProducts.length + " produits")
     })
@@ -89,7 +89,7 @@ $(function()
             products = currentProducts
         }
 
-        utils.sortProducts($(this).text().toLowerCase(), products)
+        utilities.sortProducts($(this).text().toLowerCase(), products)
         appendProductToList(products)
     })
 

@@ -1,6 +1,6 @@
-const utils = {
+const utilities = {
     updateShoppingCartBadge: () => {
-        if (localStorage.getItem('cartQuantity') == null || localStorage.getItem('cartQuantity') == 0) {
+        if (localStorage.getItem('cartQuantity') === null || localStorage.getItem('cartQuantity') === 0) {
           $('.count').hide()
         } else {
           $('.count').text(localStorage.getItem('cartQuantity'))
@@ -39,19 +39,19 @@ const utils = {
     sortProducts: (basedOn, data) => {
         if(basedOn === "prix (bas-haut)")
         {
-            utils.sortPriceAscending(data)
+            utilities.sortPriceAscending(data)
         }
         else if (basedOn === "prix (haut-bas)")
         {
-            utils.sortPriceDescending(data)
+            utilities.sortPriceDescending(data)
         }
         else if (basedOn === "nom (a-z)")
         {
-            utils.sortNameAscending(data)
+            utilities.sortNameAscending(data)
         }
         else
         {
-            utils.sortNameDescending(data)
+            utilities.sortNameDescending(data)
         }
     },
 
