@@ -44,7 +44,8 @@ $(function() {
             let prodName = $(this).parents('tr').find("a").text();
             cartProducts = cartProducts.filter(product => product.name != prodName);
             localStorage.setItem("cart", JSON.stringify(cartProducts));
-            let price = parseFloat($(this).parents('tr').find(".price").text().replace(',','.'));
+            let price = $(this).parents('tr').find(".price").text();
+            price = parseFloat(price.substring(0, price.length - 2).replace(',','.'));
             totalPrice = parseFloat(totalPrice) - (parseFloat(quantity) * price);
             $(this).parents('tr').remove();
     
@@ -84,19 +85,20 @@ $(function() {
 
 function updateProductQuantity(cartProducts, productLine, value) {
     let quantity = parseInt(productLine.find(".quantity").text());
+    value = parseInt(value);
     quantity = quantity + value;   
     if (quantity > 0) {     
         productLine.find(".quantity").text(quantity.toString());            
         let price = productLine.find(".price").text().replace(',','.');
         let dollarSymbol = price.slice(-2);
-        price = parseFloat(price.substring(0, price.length - 2));
+        price = parseFloat(price.substring(0, price.length - 2)).toFixed(2);
         let totalAmount = productLine.find("#total-amount").text().replace(',','.');
-        totalAmount = parseFloat(totalAmount.substring(0, totalAmount.length - 2));
-        totalAmount = totalAmount + value * price;
-        totalAmount = totalAmount.toFixed(2).toString().replace('.', ',') + dollarSymbol;
+        totalAmount = totalAmount.substring(0, totalAmount.length - 2);
+        totalAmount = parseFloat(totalAmount) + parseFloat(value * price);
+        totalAmount = parseFloat(totalAmount).toFixed(2).toString().replace('.', ',') + dollarSymbol;
         productLine.find("#total-amount").text(totalAmount);
-        totalPrice = parseFloat(totalPrice) + value * price;
-        updateTotalPrice(totalPrice);
+        totalPrice = parseFloat(totalPrice) + parseFloat(value * price);
+        updateTotalPrice(parseFloat(totalPrice).toFixed(2));
         let cartQuantity = localStorage.getItem("cartQuantity");
         cartQuantity = parseInt(cartQuantity) + value;
         localStorage.setItem("cartQuantity", cartQuantity);
@@ -135,13 +137,13 @@ function updateProductCart(prodName, prodQty, cartProducts) {
 
 function updateTotalPrice(total) {
     $('.shopping-cart-total').remove();
-    total = total.toFixed(2);
+    total = parseFloat(total).toFixed(2);
     $("table").after("<p class='shopping-cart-total'>Total: <strong id='total-amount'>" + total.toString().replace('.',',') + "</strong>&thinsp;$</p>");
 }
 
 function appendProductToTable(product, quantity) {
-    let price = product.price.toFixed(2);
-    let totalAmount = price * quantity;
+    let price = parseFloat(product.price).toFixed(2);
+    let totalAmount = (parseFloat(price) * parseFloat(quantity)).toFixed(2);
     let element = $("<tr>" +
     "<td><button title='Supprimer' class='remove-item-button'><i class='fa fa-times'></i></button></td>" +
     "<td><a href='./product.html?id=" + product.id + "'>" + product.name + "</a></td>" +
