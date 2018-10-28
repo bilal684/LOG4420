@@ -4,7 +4,6 @@ $(function() {
     var productVector = [];
     var allProducts;
     var cartProducts;
-    //localStorage.setItem("cartQuantity", 0);
     if (utils.isShoppingCartEmpty()) {
         emptyTableOfProducts();
     } else {
