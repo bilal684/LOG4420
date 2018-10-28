@@ -1,4 +1,4 @@
-var totalPrice = 0;
+var totalAmount = 0;
 
 $(function() {
     var productVector = [];
@@ -12,8 +12,7 @@ $(function() {
         allProducts = utilities.getAllProducts(allProducts);
         cartProducts.forEach(function(product) {
 			allProducts.forEach(function(data) {
-				if (product.id == data.id)
-				{	
+				if (product.id == data.id) {	
                     productVector.push(data);			
 				}
 			});		
@@ -21,12 +20,12 @@ $(function() {
         utilities.sortNameAscending(productVector);
         productVector.forEach(function(product) {
             cartProducts.forEach(function(data) {
-                if (data.id == product.id)	{
+                if (data.id == product.id) {
                     appendProductToTable(product, data.quantity);
                 }
             });
         });
-        updateTotalPrice(totalPrice);
+        updateTotalAmount(totalAmount);
         $('.count').text(localStorage.getItem("cartQuantity"));
     }
     utilities.updateShoppingCartBadge();  
@@ -44,9 +43,9 @@ $(function() {
             let prodName = $(this).parents('tr').find("a").text();
             cartProducts = cartProducts.filter(product => product.name != prodName);
             localStorage.setItem("cart", JSON.stringify(cartProducts));
-            let price = $(this).parents('tr').find(".price").text();
+            let price = $(this).parents('tr').find(".unitPrice").text();
             price = parseFloat(price.substring(0, price.length - 2).replace(',','.'));
-            totalPrice = parseFloat(totalPrice) - (parseFloat(quantity) * price);
+            totalAmount = parseFloat(totalAmount) - (parseFloat(quantity) * price);
             $(this).parents('tr').remove();
     
             utilities.updateShoppingCartBadge();            
@@ -56,7 +55,7 @@ $(function() {
                 localStorage.removeItem("cart");
                 localStorage.removeItem("cartQuantity");
             } else {
-                updateTotalPrice(totalPrice);
+                updateTotalAmount(totalAmount);
             }
         }
     });
@@ -89,16 +88,16 @@ function updateProductQuantity(cartProducts, productLine, value) {
     quantity = quantity + value;   
     if (quantity > 0) {     
         productLine.find(".quantity").text(quantity.toString());            
-        let price = productLine.find(".price").text().replace(',','.');
+        let price = productLine.find(".unitPrice").text().replace(',','.');
         let dollarSymbol = price.slice(-2);
         price = parseFloat(price.substring(0, price.length - 2)).toFixed(2);
-        let totalAmount = productLine.find("#total-amount").text().replace(',','.');
-        totalAmount = totalAmount.substring(0, totalAmount.length - 2);
-        totalAmount = parseFloat(totalAmount) + parseFloat(value * price);
-        totalAmount = parseFloat(totalAmount).toFixed(2).toString().replace('.', ',') + dollarSymbol;
-        productLine.find("#total-amount").text(totalAmount);
+        let totalPrice = productLine.find(".price").text().replace(',','.');
+        totalPrice = totalPrice.substring(0, totalPrice.length - 2);
         totalPrice = parseFloat(totalPrice) + parseFloat(value * price);
-        updateTotalPrice(parseFloat(totalPrice).toFixed(2));
+        totalPrice = parseFloat(totalPrice).toFixed(2).toString().replace('.', ',') + dollarSymbol;
+        productLine.find(".price").text(totalPrice);
+        totalAmount = parseFloat(totalAmount) + parseFloat(value * price);
+        updateTotalAmount(parseFloat(totalAmount).toFixed(2));
         let cartQuantity = localStorage.getItem("cartQuantity");
         cartQuantity = parseInt(cartQuantity) + value;
         localStorage.setItem("cartQuantity", cartQuantity);
@@ -135,7 +134,7 @@ function updateProductCart(prodName, prodQty, cartProducts) {
 	localStorage.setItem("cart", JSON.stringify(cartProducts));
 }
 
-function updateTotalPrice(total) {
+function updateTotalAmount(total) {
     $('.shopping-cart-total').remove();
     total = parseFloat(total).toFixed(2);
     $("table").after("<p class='shopping-cart-total'>Total: <strong id='total-amount'>" + total.toString().replace('.',',') + "</strong>&thinsp;$</p>");
@@ -143,11 +142,11 @@ function updateTotalPrice(total) {
 
 function appendProductToTable(product, quantity) {
     let price = parseFloat(product.price).toFixed(2);
-    let totalAmount = (parseFloat(price) * parseFloat(quantity)).toFixed(2);
+    let totalPrice = (parseFloat(price) * parseFloat(quantity)).toFixed(2);
     let element = $("<tr>" +
     "<td><button title='Supprimer' class='remove-item-button'><i class='fa fa-times'></i></button></td>" +
     "<td><a href='./product.html?id=" + product.id + "'>" + product.name + "</a></td>" +
-    "<td class='price'>" + price.toString().replace('.',',') + "&thinsp;$</td>" +
+    "<td class='unitPrice'>" + price.toString().replace('.',',') + "&thinsp;$</td>" +
     "<td>" +
         "<div class='row'>" +
         "<div class='col'>" +
@@ -159,10 +158,10 @@ function appendProductToTable(product, quantity) {
         "</div>" +
         "</div>" +
     "</td>" +
-    "<td id='total-amount'>" + totalAmount.toString().replace('.',',') + "&thinsp;$</td>" +
+    "<td  class='price'>" + totalPrice.toString().replace('.',',') + "&thinsp;$</td>" +
     "</tr>");
     $('tbody').append(element);
-    totalPrice = parseFloat(totalPrice) + parseFloat(totalAmount);
+    totalAmount = parseFloat(totalAmount) + parseFloat(totalPrice);
 }
 
 
