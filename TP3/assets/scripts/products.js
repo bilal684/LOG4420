@@ -6,18 +6,13 @@ $(function()
     var currentProducts
     $(".product").remove()
 
-    $.ajax({
-        async:false,
-        url:"./data/products.json",
-        success: function(data)
-        {
-            allProducts = data
-            utilities.sortProducts($("#product-criteria .selected").text().toLowerCase(), data)
-            appendProductToList(data)
-            $("products-count").text(data.length + " produits")
-        }
-    })
+    //Obtention de la liste des produits du serveur.
+    allProducts = utilities.getAllProducts(allProducts)
+    utilities.sortProducts($("#product-criteria .selected").text().toLowerCase(), allProducts)
+    appendProductToList(allProducts)
+    $("products-count").text(allProducts.length + " produits") //Update du décompte des produits sur la page.
 
+    //Pour la sélection des catégories de produits.
     $("#product-categories button").click(function(){
 
         $("#product-categories .selected").removeClass("selected")
@@ -26,7 +21,7 @@ $(function()
         $(".product").remove()
 
         let selectedCategory;
-
+        
         if($(this).text().toLowerCase() === "appareils photo")
         {
             selectedCategory = "cameras"
@@ -70,7 +65,7 @@ $(function()
         $("#products-count").text(currentProducts.length + " produits")
     })
 
-
+    //Pour le filtrage des produits.
     $("#product-criteria button").click(function(){
 
         $("#product-criteria .selected").removeClass("selected")
@@ -94,7 +89,7 @@ $(function()
     })
 
 })
-
+//Permet d'ajouter un produit au tableau des produits.
 function appendProductToList(data)
 {
     data.forEach(function(product) {
