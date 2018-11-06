@@ -2,6 +2,25 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/assets/css/default.css')
+    link(rel='stylesheet', href='/assets/css/style.css')
   body
-    block content
+    //block content
+    header
+      .header-container
+        .logo
+          a(href='./index.html')
+            img(alt='logo', src='./assets/img/logo.svg', title='Accueil')
+        nav
+          ul
+            li.active
+              a(href='./index.html') Accueil
+            li
+              a(href='./products.html') Produits
+            li
+              a(href='./contact.html') Contact
+            li
+              a.shopping-cart(href='./shopping-cart.html', title='Panier')
+                span.fa-stack.fa-lg
+                  i.fa.fa-circle.fa-stack-2x.fa-inverse
+                  i.fa.fa-shopping-cart.fa-stack-1x
+                span.count 3

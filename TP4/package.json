@@ -8,13 +8,13 @@
     "e2e": "nightwatch --config ./tests/nightwatch.json"
   },
   "dependencies": {
-    "body-parser": "~1.17.1",
+    "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
-    "express": "~4.15.2",
+    "express": "^4.16.4",
     "express-session": "^1.15.5",
     "mongoose": "^4.11.8",
-    "morgan": "~1.8.1",
+    "morgan": "^1.9.1",
     "path": "^0.12.7",
     "pug": "~2.0.0-beta11",
     "serve-favicon": "~2.4.2"
@@ -22,10 +22,10 @@
   "devDependencies": {
     "assert": "^1.4.1",
     "chai": "^4.1.1",
-    "chai-http": "^3.0.0",
+    "chai-http": "^4.2.0",
     "events": "^1.1.1",
-    "mocha": "^3.5.0",
-    "nightwatch": "^0.9.16",
+    "mocha": "^5.2.0",
+    "nightwatch": "^1.0.11",
     "nightwatch-custom-commands-assertions": "^1.1.0",
     "nodemon": "^1.11.0",
     "random-number": "0.0.9",
