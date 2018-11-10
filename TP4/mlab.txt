@@ -1,0 +1,4 @@
+username : LOG4420_Bilal_Said
+password: 4420LOG
+
+database name : log4420_bilal_said_online-shop
