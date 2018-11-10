@@ -55,6 +55,21 @@ const utilities = {
             utilities.sortPriceAscending(data)
         }
     },
+
+    isListOfNonEmptyElements : (list) => {
+        if(list.length < 1)
+        {
+            return false
+        }
+        for(l of list)
+        {
+            if(!l || 0 === l.length)
+            {
+                return false
+            }
+        }
+        return true
+    }
     /*//Fonction pour obtenir l'identifiant du URL.
     getUrlParams: (name) =>{
             var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href)
