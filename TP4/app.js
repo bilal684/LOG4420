@@ -36,8 +36,8 @@ app.use(session({
 
 app.use("/", index);
 app.use("/api/products", require("./routes/products"));
-app.use("/api/orders", require("./routes/orders"));
-app.use("/api/shopping-cart", require("./routes/shopping-cart"));
+//app.use("/api/orders", require("./routes/orders"));
+//app.use("/api/shopping-cart", require("./routes/shopping-cart"));
 
 // catch 404 and forward to error handler
 app.use((req, res, next)=> {
