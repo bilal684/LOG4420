@@ -38,7 +38,7 @@ const utilities = {
     },
     //Fonction maitresse pour le trie des produits.
     sortProducts: (basedOn, data) => {
-        if(basedOn === "aplha-dsc")
+        if(basedOn === "alpha-dsc")
         {
             utilities.sortNameDescending(data)
         }
