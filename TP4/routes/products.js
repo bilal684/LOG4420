@@ -80,4 +80,20 @@ router.get("/", function(req, res)
     }
 });
 
+router.get("/:id", function(req, res) 
+{
+	var ID = req.params.id;
+    Product.findOne({id : ID},function(err,product)
+    { 
+        if (product === null)
+        {
+    		return res.status(404).send("Product not found.");
+        }
+    	res.status(200)
+        res.json(product)
+		res.end()
+    });
+
+});
+
 module.exports = router

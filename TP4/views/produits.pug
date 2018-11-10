@@ -23,12 +23,12 @@ block content
         #products-list.products
             each prod in products
                 .product(data-product-id=prod.id)
-                    a(href='./produits/' + prod.id, title='En savoir plus...')
+                    a(href='/produits/' + prod.id, title='En savoir plus...')
                         h2 #{prod.name}
-                        img(alt='product', src='./assets/img/' + prod.image)
+                        img(alt='product', src='/assets/img/' + prod.image)
                         p.price
                             small Prix
                             |  #{prod.price}
 
 block customscript
-    script(type='text/javascript', src='./assets/scripts/products.controller.js')
+    script(type='text/javascript', src='/assets/scripts/products.controller.js')

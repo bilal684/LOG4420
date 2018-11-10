@@ -12,10 +12,26 @@ router.get("/accueil", (req, res) => {
 
 router.get('/produits', function(req, res, next) {
   request("http://localhost:8000/api/products", function (err, response, body) {
-    if (err || response.statusCode !== 200) {
-      return res.sendStatus(500);
+    if (err) 
+    {
+      return err
+    } else if(response.statusCode !== 200) {
+      return response
     }
     res.render('produits', { title: "OnlineShop - Produits", name:"produits", products : JSON.parse(body) });
+  });
+});
+
+router.get('/produits/:id', function(req, res, next) {
+  request("http://localhost:8000/api/products/" + req.params.id, function (err, response, body) {
+    if (err)
+    {
+      return err
+    } 
+    else if(response.statusCode !== 200) {
+      return response
+    }
+    res.render('produit', { title: "OnlineShop - Produit", name:"produits", product : JSON.parse(body) });
   });
 });
 
