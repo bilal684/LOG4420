@@ -11,7 +11,7 @@ router.get("/accueil", (req, res) => {
 });
 
 router.get('/produits', function(req, res, next) {
-    databaseManager.findAllProducts(function(prods) {res.render('produits', { title: "OnlineShop - Produits", name:"produits", products : prods})})
+    databaseManager.findAllProducts(function(prods) {res.render('produits', { title: "OnlineShop - Produits", name:"produits", productsCount : prods.length, products : prods})})
 });
 
 router.get('/produits/:id', function(req, res, next) {
