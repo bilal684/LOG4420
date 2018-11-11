@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 let request = require('request');
 let databaseManager = require("./databaseManager")
+let utilities = require("./utilities")
+
 router.get("/", (req, res) => {
   res.render("index", { title: "OnlineShop - Accueil", name:"index" });
 });
@@ -11,7 +13,10 @@ router.get("/accueil", (req, res) => {
 });
 
 router.get('/produits', function(req, res, next) {
-    databaseManager.findAllProducts(function(prods) {res.render('produits', { title: "OnlineShop - Produits", name:"produits", productsCount : prods.length, products : prods})})
+    databaseManager.findAllProducts(function(prods) {
+      utilities.sortProducts("price-asc", prods)
+      res.render('produits', { title: "OnlineShop - Produits", name:"produits", productsCount : prods.length, products : prods})
+    })
 });
 
 router.get('/produits/:id', function(req, res, next) {
