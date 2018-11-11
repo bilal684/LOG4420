@@ -1,9 +1,10 @@
-var express = require("express")
-var router = express.Router()
-var validator = require("validator")
-var mongoose = require("mongoose")
-var Product = mongoose.model("Product")
+let express = require("express")
+let router = express.Router()
+let validator = require("validator")
+let mongoose = require("mongoose")
+let Product = mongoose.model("Product")
 let utilities = require("./utilities")
+let databaseManager = require("./databaseManager")
 
 router.get("/", function(req, res) 
 {	
@@ -16,13 +17,12 @@ router.get("/", function(req, res)
             if((category === "cameras" || category === "computers" || category === "consoles" || category === "screens" || category === "all") &&
                 (criteria === "alpha-asc" || criteria === "alpha-dsc" || criteria === "price-asc" || criteria === "price-dsc"))
             {
-                Product.find({"category" : category}, function(err,products)
-				{  
+                databaseManager.findProductByCategory(category, function(products) {
                     utilities.sortProducts(criteria, products)
 					res.status(200)
 			        res.json(products)
 					res.end()
-			    });
+                })
             }
 			else
 			{
@@ -33,13 +33,12 @@ router.get("/", function(req, res)
         {
             if (category === "cameras" || category === "computers" || category === "consoles" || category === "screens") 
 			{
-                Product.find({"category" : category}, function(err,products) 
-				{ 
+                databaseManager.findProductByCategory(category, function(products) {
                     utilities.sortProducts("price-asc", products)
 					res.status(200)
 			        res.json(products)
 					res.end()
-			    });
+                })
 			}
 			else
 			{
@@ -50,13 +49,13 @@ router.get("/", function(req, res)
         {
             if (criteria === "alpha-asc" || criteria === "alpha-dsc" || criteria === "price-asc" || criteria === "price-dsc")
 			{
-                Product.find({}, function(err,products)
-				{  
+                databaseManager.findAllProducts(function(products) {
                     utilities.sortProducts(criteria, products)
 					res.status(200)
 			        res.json(products)
 					res.end()
-			    });
+                })
+                
 			}
 			else
 			{
@@ -70,15 +69,14 @@ router.get("/", function(req, res)
     }
     else
     {
-        Product.find({}, function(err, products)
-        {
+        databaseManager.findAllProducts(function(products) {
             utilities.sortProducts("price-asc", products)
             res.status(200)
             res.json(products)
             res.end()
-        });
+        })
     }
-});
+})
 
 router.get("/:id", function(req, res) 
 {
@@ -160,7 +158,7 @@ router.post("/", function(req, res)
 
 										newProduct.save(function(err) {
 											return res.status(201).send("Product " + req.body.id + " - " + req.body.name + " was added to the database.");
-										});
+										})
 									}
 								}
 							}
