@@ -35,6 +35,13 @@ const databaseManager = {
         {
             callback(err, removed)
         })
+    },
+
+    countProducts:(id,callback) => {
+        Product.count({"id":id}, function(err, count) {
+
+            callback(count)
+        })
     }
 }
 

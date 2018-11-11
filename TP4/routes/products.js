@@ -99,7 +99,7 @@ router.post("/", function(req, res)
 {
 	if(validator.isInt(JSON.stringify(req.body.id)))
 	{
-		Product.count({id:JSON.stringify(req.body.id)}, function (count)
+		databaseManager.countProducts(JSON.stringify(req.body.id), function (count)
 		{ 
 			if(count > 0)
 			{
@@ -166,7 +166,7 @@ router.post("/", function(req, res)
 					}
 				}
 			}
-		});
+		})
 	}
 	else
 	{
