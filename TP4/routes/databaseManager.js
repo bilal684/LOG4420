@@ -25,15 +25,15 @@ const databaseManager = {
     },
 
     deleteAllProducts: (callback) => {
-        Product.remove({}, function(removed)
+        Product.remove({}, function()
         {
-            callback(removed)
+            callback()
         })
     },
     deleteProductById: (id, callback) => {
         Product.remove({"id" : id}, function()
         {
-
+            callback(removed)
         })
     }
 }
