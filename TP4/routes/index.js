@@ -20,7 +20,9 @@ router.get('/produits', function(req, res, next) {
 });
 
 router.get('/produits/:id', function(req, res, next) {
-    databaseManager.findProductById(req.params.id, function(prod) {res.render('produit', { title: "OnlineShop - Produit", name:"produits", product : prod })})
+    databaseManager.findProductById(req.params.id, function(prod) {
+      res.render('produit', { title: "OnlineShop - Produit", name:"produits", product : prod })
+    })
 });
 
 router.get("/contact", (req, res) => {
