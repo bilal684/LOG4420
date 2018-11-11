@@ -31,9 +31,9 @@ const databaseManager = {
         })
     },
     deleteProductById: (id, callback) => {
-        Product.remove({"id" : id}, function()
+        Product.findOneAndRemove({"id" : id}, function(err, removed)
         {
-            callback(removed)
+            callback(err, removed)
         })
     }
 }

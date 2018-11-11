@@ -179,15 +179,17 @@ router.delete("/:id", function(req, res)
 {
 	var id = req.params.id;
     
-    databaseManager.deleteProductById(id, function(removed)
+    databaseManager.deleteProductById(id, function(err, removed)
     {
-        if (removed.result.n == 0){
-			return res.status(404).send("Product not found.");
+        if(err)
+        {
+            return res.status(404).send("Cannot remove item.")
+        }
+        if (!removed){
+            return res.status(404).send("Product not found.");
+            
 		}
-		else
-		{
-			return res.status(204).send("Product " + id + " was successfully deleted.")
-		}
+		return res.status(204).send("Product " + removed.id + " was successfully deleted.")
     })
 });
 
