@@ -81,7 +81,7 @@ router.get("/", function(req, res)
 router.get("/:id", function(req, res) 
 {
 	var id = req.params.id;
-    Product.findOne({"id" : id},function(err,product)
+    Product.findOne({"id" : id},function(product)
     { 
         if (product === null)
         {
@@ -99,7 +99,7 @@ router.post("/", function(req, res)
 {
 	if(validator.isInt(JSON.stringify(req.body.id)))
 	{
-		Product.count({id:JSON.stringify(req.body.id)}, function (err, count)
+		Product.count({id:JSON.stringify(req.body.id)}, function (count)
 		{ 
 			if(count > 0)
 			{
@@ -178,25 +178,25 @@ router.post("/", function(req, res)
 router.delete("/:id", function(req, res)
 {
 	var id = req.params.id;
-	
-	Product.remove({"id":id}, function(err, removed)
-	{
-		if (removed.result.n == 0){
+    
+    databaseManager.deleteProductById(id, function(removed)
+    {
+        if (removed.result.n == 0){
 			return res.status(404).send("Product not found.");
 		}
 		else
 		{
 			return res.status(204).send("Product " + id + " was successfully deleted.")
 		}
-	});
+    })
 });
 
 router.delete("/", function(req, res)
 {
-	Product.remove({}, function(err, removed)
+    databaseManager.deleteAllProducts(function()
 	{
 		return res.status(204).send("All products were removed.");
-	});
+	})
 });
 
 
