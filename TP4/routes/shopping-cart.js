@@ -35,9 +35,9 @@ router.get("/:productId", function(req, res)
     if(req.session.order)
     {
         let allShoppingCartProducts = JSON.parse(req.session.order)
-        for(product of allShoppingCartProducts)
+        for(let product of allShoppingCartProducts)
         {
-            if(product.productId === id)
+            if(product.productId == id)
             {
                 isInShoppingCart = true
                 res.status(200).json(product).end()
@@ -56,53 +56,55 @@ router.get("/:productId", function(req, res)
 
 router.post("/", function(req, res)
 {
-    let validId = req.body.productId == parseInt(req.body.productId, 10)
-
-    let productId = JSON.parse(req.body.productId)
-    let quantity = JSON.stringify(req.body.quantity)
-    if(validId)
+  let isValidNumber = req.body.productId == parseInt(req.body.productId, 10);
+  if(isValidNumber)
+  {
+    if(validator.isInt(JSON.stringify(JSON.parse(req.body.productId))))
     {
-        if(validator.isInt(JSON.stringify(productId)))
+      Product.count({id:req.body.productId}, function(err, count)
+      {
+        if(count === 0)
         {
-            Product.count({id:productId}, function(err, count)
-            {
-                if(count === 0)
-                {
-                    return res.status(400).send("Specified product id is invalid").end()
-                }
-                else
-                {
-                    if(validator.isInt(quantity, {gt:0}))
-                    {
-                        let newProduct = new Object()
-                        newProduct.productId = productId
-                        newProduct.quantity = req.body.quantity
-                        if(req.session.order && req.session.order.length > 0)
-                        {
-                            let allProducts = JSON.parse(req.session.order)
-                            allProducts.push(newProduct)
-                            req.session.order = JSON.stringify(allProducts)
-                        }
-                        else
-                        {
-                            let allProducts = []
-                            allProducts.push(newProduct)
-                            req.session.order = JSON.stringify(allProducts)
-                        }
-                        return res.status(201).send("Item was added to the shopping cart").end()
-                    }
-                    else
-                    {
-                        return res.status(400).send("Specified quantity should be greater than 0").end()
-                    }
-                }
-            })
+          res.status(400).send("Specified product id does not exist").end()
         }
+        else
+        {
+          if(validator.isInt(JSON.stringify(req.body.quantity), {gt:0}))
+          {
+            let newProduct = new Object()
+            newProduct.productId = JSON.parse(req.body.productId);
+            newProduct.quantity = req.body.quantity;
+            if(req.session.order && req.session.order.length > 0)
+            {
+              let allProducts = JSON.parse(req.session.order)
+              allProducts.push(newProduct)
+              req.session.order = JSON.stringify(allProducts)
+            }
+            else
+            {
+              let allProducts = []
+              allProducts.push(newProduct)
+              req.session.order = JSON.stringify(allProducts)
+            }
+            res.status(201).send("Item was added to the shopping cart").end()
+          }
+          else
+          {
+            res.status(400).send("Specified quantity should be greater than 0").end()
+          }
+        }
+      })
     }
     else
     {
-        return res.status(400).send("Specified product id is invalid.").end()
+      res.status(400).send("Specified product id is invalid.").end()
     }
+  }
+  else
+  {
+    res.status(400).send("Specified product id is invalid.").end()
+  }
+
 })
 
 router.put("/:productId", function(req, res)
@@ -117,7 +119,7 @@ router.put("/:productId", function(req, res)
             let allProducts = JSON.parse(req.session.order)
             for(product of allProducts)
             {
-                
+
                 if(product.productId == id)
                 {
                     isInShoppingCart = true
@@ -151,7 +153,7 @@ router.delete("/:productId", function(req, res)
         let allProducts = JSON.parse(req.session.order)
         for(product of allProducts)
         {
-            if(product.productId === id)
+            if(product.productId == id)
             {
                 isInShoppingCart = true
                 let indexOfProduct = allProducts.indexOf(product)
@@ -173,8 +175,8 @@ router.delete("/:productId", function(req, res)
 
 router.delete("/", function(req, res)
 {
-    req.session.order = undefined
-    req.status(204).send("All shopping-cart products were successfully deleted.").end()
+    req.session.order = []
+    res.status(204).send("All shopping-cart products were successfully deleted.").end()
 })
 
 module.exports = router

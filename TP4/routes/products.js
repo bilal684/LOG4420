@@ -80,8 +80,8 @@ router.get("/", function(req, res)
 
 router.get("/:id", function(req, res) 
 {
-	var id = req.params.id;
-    Product.findOne({"id" : id},function(product)
+	  var id = req.params.id;
+    Product.findOne({"id" : id}, function(err, product)
     { 
         if (product === null)
         {
