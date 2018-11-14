@@ -3,44 +3,44 @@ const router = express.Router();
 let request = require('request');
 let databaseManager = require("./databaseManager")
 let utilities = require("./utilities")
-const session = require("express-session");
+session = require("express-session");
 
 
 router.get("/", (req, res) => {
-  res.render("index", { title: "OnlineShop - Accueil", name:"index" });
+  res.render("index", { title: "OnlineShop - Accueil", name:"index", shoppingCartCount: utilities.getShoppingCartCount(req.session.order)});
 });
 
 router.get("/accueil", (req, res) => {
-  res.render("index", { title: "OnlineShop - Accueil", name:"index"/*, shoppingCartCount: (session.order) ? session.order.length: 0*/});
+  res.render("index", { title: "OnlineShop - Accueil", name:"index", shoppingCartCount: utilities.getShoppingCartCount(req.session.order)});
 });
 
 router.get('/produits', function(req, res, next) {
     databaseManager.findAllProducts(function(prods) {
       utilities.sortProducts("price-asc", prods)
-      res.render('produits', { title: "OnlineShop - Produits", name:"produits", productsCount : prods.length, products : prods/*, shoppingCartCount: (session.order) ? session.order.length: 0*/})
+      res.render('produits', { title: "OnlineShop - Produits", name:"produits", productsCount : prods.length, products : prods, shoppingCartCount: utilities.getShoppingCartCount(req.session.order)})
     })
 });
 
 router.get('/produits/:id', function(req, res, next) {
     databaseManager.findProductById(req.params.id, function(prod) {
-      res.render('produit', { title: "OnlineShop - Produit", name:"produits", product : prod/*, shoppingCartCount: (session.order) ? session.order.length: 0 */})
+      res.render('produit', { title: "OnlineShop - Produit", name:"produits", product : prod, shoppingCartCount: utilities.getShoppingCartCount(req.session.order) })
     })
 });
 
 router.get("/contact", (req, res) => {
-  res.render("contact", { title: "OnlineShop - Contact", name:"contact"/*, shoppingCartCount: (session.order) ? session.order.length: 0*/ });
+  res.render("contact", { title: "OnlineShop - Contact", name:"contact", shoppingCartCount: utilities.getShoppingCartCount(req.session.order) });
 });
 
 router.get("/panier", (req, res) => {
-  res.render("panier", { title: "OnlineShop - Panier"/*, shoppingCartCount: (session.order) ? session.order.length: 0*/ });
+  res.render("panier", { title: "OnlineShop - Panier", shoppingCartCount: utilities.getShoppingCartCount(req.session.order) });
 });
 
 router.get("/commande", (req, res) => {
-  res.render("commande", { title: "OnlineShop - Commande"/*, shoppingCartCount: (session.order) ? session.order.length: 0 */});
+  res.render("commande", { title: "OnlineShop - Commande", shoppingCartCount: utilities.getShoppingCartCount(req.session.order)});
 });
 
 router.get("/confirmation", (req, res) => {
-  res.render("confirmation", { title: "OnlineShop - Confirmation"/*, shoppingCartCount: (session.order) ? session.order.length: 0*/ });
+  res.render("confirmation", { title: "OnlineShop - Confirmation", shoppingCartCount: utilities.getShoppingCartCount(req.session.order) });
 });
 
 module.exports = router

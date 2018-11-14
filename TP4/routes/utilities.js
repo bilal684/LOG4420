@@ -69,7 +69,22 @@ const utilities = {
             }
         }
         return true
+    },
+
+    getShoppingCartCount : (allProducts) => {
+        totalCount = 0
+        if(allProducts)
+        {
+          allProducts = JSON.parse(allProducts)
+          for(product of allProducts)
+          {
+            totalCount += product.quantity
+          }
+        }
+        return totalCount
     }
+    
+
     /*//Fonction pour obtenir l'identifiant du URL.
     getUrlParams: (name) =>{
             var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href)

@@ -118,12 +118,12 @@ router.put("/:productId", function(req, res)
             for(product of allProducts)
             {
                 
-                if(product.productId === id)
+                if(product.productId == id)
                 {
                     isInShoppingCart = true
                     product.quantity = quantity
                     req.session.order = JSON.stringify(allProducts)
-                    req.status(204).send("Quantity was updated").end()
+                    res.status(204).send("Quantity was updated").end()
                 }
             }
             if(!isInShoppingCart)
