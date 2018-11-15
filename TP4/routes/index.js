@@ -4,6 +4,8 @@ let request = require('request');
 let databaseManager = require("./databaseManager")
 let utilities = require("./utilities")
 session = require("express-session");
+let mongoose = require("mongoose")
+let Product = mongoose.model("Product")
 
 
 router.get("/", (req, res) => {
@@ -32,7 +34,10 @@ router.get("/contact", (req, res) => {
 });
 
 router.get("/panier", (req, res) => {
-  res.render("panier", { title: "OnlineShop - Panier", shoppingCartCount: utilities.getShoppingCartCount(req.session.order) });
+  databaseManager.getAllProductsBasedOnShoppingCart(req.session.order, function (order) {
+    res.render("panier", { title: "OnlineShop - Panier", shoppingCartCount: utilities.getShoppingCartCount(req.session.order), order : order });
+  })
+
 });
 
 router.get("/commande", (req, res) => {

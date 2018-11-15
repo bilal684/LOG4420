@@ -13,11 +13,30 @@ block content
                         th Quantité
                         th Prix
                 tbody
+                    each val in order
+                        tr
+                            td
+                                button.remove-item-button(title='Supprimer')
+                                    i.fa.fa-times
+                            td
+                                a(href='/produits/' + val['productId']) #{val['name']}
+                            td.unitPrice #{val['price']} $
+                            td
+                                .row
+                                    .col
+                                        button.remove-quantity-button(title='Retirer', disabled='')
+                                            i.fa.fa-minus
+                                    .col.quantity #{val['quantity']}
+                                    .col
+                                        button.add-quantity-button(title='Ajouter')
+                                            i.fa.fa-plus
+                            td.price #{val['price'] * val['quantity']} $
             p.shopping-cart-total
-                | Total: 
-                strong#total-amount
+                | Total:
+                - function getTotal() { var total = 0; for(let p of order) { total += p.quantity * p.price }; return total }
+                strong#total-amount #{getTotal()} $
             a.btn.pull-right(href='./order.html')
-                | Commander 
+                | Commander
                 i.fa.fa-angle-double-right
             button#remove-all-items-button.btn
                 i.fa.fa-trash-o
