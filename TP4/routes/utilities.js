@@ -59,8 +59,9 @@ const utilities = {
   },
 
   getShoppingCartCount: (allProducts) => {
+
     totalCount = 0
-    if (allProducts) {
+    if (allProducts && typeof(allProducts) == "string") {
       allProducts = JSON.parse(allProducts)
       for (product of allProducts) {
         totalCount += product.quantity
