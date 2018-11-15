@@ -14,7 +14,7 @@ block content
                         th Prix
                 tbody
                     each val in order
-                        tr
+                        tr(data-product-id=val['productId'])
                             td
                                 button.remove-item-button(title='Supprimer')
                                     i.fa.fa-times
