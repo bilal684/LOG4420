@@ -20,7 +20,7 @@ block content
                                     i.fa.fa-times
                             td
                                 a(href='/produits/' + val['productId']) #{val['name']}
-                            td.unitPrice #{fPrice(val['price'])} 
+                            td.unitPrice #{fPrice(val['price'])}  $
                             td
                                 .row
                                     .col
@@ -30,11 +30,11 @@ block content
                                     .col
                                         button.add-quantity-button(title='Ajouter')
                                             i.fa.fa-plus
-                            td.price #{fPrice(val['price'] * val['quantity'])}
+                            td.price #{fPrice(val['price'] * val['quantity'])} $
             p.shopping-cart-total
                 | Total:
                 - function getTotal() { var total = 0; for(let p of order) { total += p.quantity * p.price }; return total }
-                strong#total-amount #{fPrice(getTotal())}
+                strong#total-amount #{fPrice(getTotal())} $
             a.btn.pull-right(href='/commande')
                 | Commander
                 i.fa.fa-angle-double-right

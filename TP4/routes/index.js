@@ -32,7 +32,7 @@ router.get("/contact", (req, res) => {
 
 router.get("/panier", (req, res) => {
   databaseManager.getAllProductsBasedOnShoppingCart(req.session.order, function (order) {
-    res.render("panier", { title: "OnlineShop - Panier", shoppingCartCount: utilities.getShoppingCartCount(req.session.order), order : order, fPrice : formatPrice });
+    res.render("panier", { title: "OnlineShop - Panier", shoppingCartCount: utilities.getShoppingCartCount(req.session.order), order : order, fPrice : utilities.formatPrice });
   })
 
 });
@@ -41,8 +41,8 @@ router.get("/commande", (req, res) => {
   res.render("commande", { title: "OnlineShop - Commande", shoppingCartCount: utilities.getShoppingCartCount(req.session.order)});
 });
 
-router.get("/confirmation", (req, res) => {
-  res.render("confirmation", { title: "OnlineShop - Confirmation", shoppingCartCount: utilities.getShoppingCartCount(req.session.order) });
+router.post("/confirmation", (req, res) => {
+  res.render("confirmation", { title: "OnlineShop - Confirmation", shoppingCartCount: utilities.getShoppingCartCount(req.session.order), firstName : req.body["first-name"], lastName : req.body["last-name"]});
 });
 
 function formatPrice(price)
