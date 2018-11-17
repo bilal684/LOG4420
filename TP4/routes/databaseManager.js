@@ -1,3 +1,4 @@
+let utilities = require("./utilities")
 let mongoose = require("mongoose")
 const Product = mongoose.model("Product")
 const databaseManager = {
@@ -55,6 +56,7 @@ const databaseManager = {
           itemsProcessed++
           if(itemsProcessed === allProducts.length)
           {
+            utilities.sortProducts("alpha-asc", allProductInfo)
             callback(allProductInfo)
           }
         })
