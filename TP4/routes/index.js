@@ -16,7 +16,7 @@ router.get("/accueil", (req, res) => {
 router.get('/produits', function(req, res, next) {
     databaseManager.findAllProducts(function(prods) {
       utilities.sortProducts("price-asc", prods)
-      res.render('produits', { title: "OnlineShop - Produits", name:"produits", productsCount : prods.length, products : prods, shoppingCartCount: utilities.getShoppingCartCount(req.session.order)})
+      res.render('produits', { title: "OnlineShop - Produits", name:"produits", productsCount : prods.length, products : prods, shoppingCartCount: utilities.getShoppingCartCount(req.session.order), fPrice : utilities.formatPrice})
     })
 });
 
@@ -45,9 +45,9 @@ router.post("/confirmation", (req, res) => {
   res.render("confirmation", { title: "OnlineShop - Confirmation", shoppingCartCount: utilities.getShoppingCartCount(req.session.order), firstName : req.body["first-name"], lastName : req.body["last-name"]});
 });
 
-function formatPrice(price)
+/*function formatPrice(price)
 {
     return price.toFixed(2).replace(".", ",") + " $"
-}
+}*/
 
 module.exports = router
