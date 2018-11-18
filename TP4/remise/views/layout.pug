@@ -1,0 +1,41 @@
+doctype html
+html
+  head
+    title= title
+    link(rel="stylesheet", type="text/css", href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
+    link(rel='stylesheet', href='/assets/css/style.css')
+  body
+    
+    header
+      .header-container
+        .logo
+          a(href='/')
+            img(alt='logo', src='/assets/img/logo.svg', title='Accueil')
+        nav
+          ul
+            li(class=(name === "index" ? "active" : undefined))
+              a(href='/accueil') Accueil
+            li(class=(name === "produits" ? "active" : undefined))
+              a(href='/produits') Produits
+            li(class=(name === "contact" ? "active" : undefined))
+              a(href='/contact') Contact
+            li
+              a.shopping-cart(href='/panier', title='Panier')
+                span.fa-stack.fa-lg
+                  i.fa.fa-circle.fa-stack-2x.fa-inverse
+                  i.fa.fa-shopping-cart.fa-stack-1x
+                if shoppingCartCount > 0
+                  span.count.visible #{shoppingCartCount}
+                else
+                  span.count #{shoppingCartCount}
+    main
+      block content
+
+    footer
+      p Par Bilal Itani et Said Hmani
+    script(type='text/javascript', src='/assets/js/jquery-3.2.1.min.js')
+    script(type='text/javascript', src='/assets/scripts/utils.js')
+    script(type='text/javascript', src='/assets/scripts/products.service.js')
+    script(type='text/javascript', src='/assets/scripts/shopping-cart.service.js')
+    script(type='text/javascript', src='/assets/scripts/shopping-cart.controller.js')
+    block customscript
