@@ -3,9 +3,8 @@ let router = express.Router()
 let validator = require("validator")
 let mongoose = require("mongoose")
 let Product = mongoose.model("Product")
-let utilities = require("./utilities")
-let session = require("express-session")
 
+//Route for GET /api/shopping-cart (Get all items in shopping-cart)
 router.get("/", function (req, res) {
   if (req.session.order) {
     if (req.session.order.length > 0) {
@@ -22,6 +21,7 @@ router.get("/", function (req, res) {
   }
 })
 
+//Route for GET /api/shopping-cart/:productId (Get a specific product in the shopping cart)
 router.get("/:productId", function (req, res) {
   let id = req.params.productId
   let isInShoppingCart = false
@@ -43,6 +43,7 @@ router.get("/:productId", function (req, res) {
   }
 })
 
+//Route for POST /api/shopping-cart (Add a specific item in the shopping-cart)
 router.post("/", function (req, res) {
   let isValidNumber = req.body.productId == parseInt(req.body.productId, 10);
   if (isValidNumber) {
@@ -84,6 +85,7 @@ router.post("/", function (req, res) {
 
 })
 
+//Route for put /api/shopping-cart/:productId (To update quantity of a specific product in the shopping-cart)
 router.put("/:productId", function (req, res) {
   let id = req.params.productId
   let quantity = req.body.quantity
@@ -113,6 +115,7 @@ router.put("/:productId", function (req, res) {
   }
 })
 
+//Route for delete /api/shopping-cart/:productId (To remove a product in the shopping-cart)
 router.delete("/:productId", function (req, res) {
   let id = req.params.productId
   let isInShoppingCart = false
@@ -136,6 +139,7 @@ router.delete("/:productId", function (req, res) {
   }
 })
 
+//Route for delete /api/shopping-cart (To remove all products in the shopping-cart)
 router.delete("/", function (req, res) {
   req.session.order = []
   return res.status(204).send("All shopping-cart products were successfully deleted.").end()

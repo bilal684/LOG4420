@@ -30,6 +30,7 @@ const utilities = {
       return 0;
     })
   },
+
   //Fonction maitresse pour le trie des produits.
   sortProducts: (basedOn, data) => {
     if (basedOn === "alpha-dsc") {
@@ -46,6 +47,7 @@ const utilities = {
     }
   },
 
+  //Check if list is empty or not.
   isListOfNonEmptyElements: (list) => {
     if (list.length < 1) {
       return false
@@ -58,6 +60,7 @@ const utilities = {
     return true
   },
 
+  //Get shopping-cart product count.
   getShoppingCartCount: (allProducts) => {
 
     totalCount = 0
@@ -70,15 +73,16 @@ const utilities = {
     return totalCount
   },
 
-  formatPrice : (price) => {
+  //Formats the price of a product (removes the '.' and replaces it with a ','
+  formatPrice: (price) => {
     return price.toFixed(2).replace(".", ",")
   },
 
-  getTotalShoppingCartPrice : (shoppingCart) => {
+  //Calculates the total shopping-cart price.
+  getTotalShoppingCartPrice: (shoppingCart) => {
 
     let total = 0
-    for(let p of shoppingCart)
-    {
+    for (let p of shoppingCart) {
       total += p.quantity * p.price
     }
     return total

@@ -1,16 +1,18 @@
-var express = require("express");
-var router = express.Router();
-var validator = require('validator');
-var mongoose = require("mongoose");
-var Order = mongoose.model('Order');
-var Product = mongoose.model('Product');
+let express = require("express");
+let router = express.Router();
+let validator = require('validator');
+let mongoose = require("mongoose");
+let Order = mongoose.model('Order');
+let Product = mongoose.model('Product');
 
+// Route for GET /api/orders (Get all orders)
 router.get("/", function (req, res) {
   Order.find({}, function (err, orders) {
     return res.status(200).json(orders).end()
   })
 })
 
+// Route for GET /api/orders/:id (Get a specific order)
 router.get("/:id", function (req, res) {
   let id = req.params.id
   Order.findOne({"id": id}, function (err, order) {
@@ -21,6 +23,7 @@ router.get("/:id", function (req, res) {
   })
 })
 
+// Route for POST /api/orders (Place an order)
 router.post("/", function (req, res) {
   if (validator.isInt(JSON.stringify(req.body.id))) {
     Order.count({id: JSON.stringify(req.body.id)}, function (err, count) {
@@ -89,6 +92,7 @@ router.post("/", function (req, res) {
   }
 })
 
+// Route for delete /api/orders/:id (Delete a specific order)
 router.delete("/:id", function (req, res) {
   let id = req.params.id
   Order.remove({"id": id}, function (err, removed) {
@@ -101,6 +105,7 @@ router.delete("/:id", function (req, res) {
   })
 })
 
+// Route for delete /api/orders (Delete all orders)
 router.delete("/", function (req, res) {
   Order.remove({}, function (err, removed) {
     return res.status(204).send("Order collection was pruned").end()

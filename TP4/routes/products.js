@@ -6,6 +6,7 @@ let Product = mongoose.model("Product")
 let utilities = require("./utilities")
 let databaseManager = require("./databaseManager")
 
+// Route for GET /api/products (Get all products)
 router.get("/", function (req, res) {
   if (Object.keys(req.query).length > 0) {
     let category = req.query.category
@@ -57,6 +58,7 @@ router.get("/", function (req, res) {
   }
 })
 
+// Route for GET /api/products/:id (Get a specific product)
 router.get("/:id", function (req, res) {
   let id = req.params.id;
   Product.findOne({"id": id}, function (err, product) {
@@ -68,7 +70,7 @@ router.get("/:id", function (req, res) {
 
 });
 
-
+// Route for POST /api/products (Create a new product)
 router.post("/", function (req, res) {
   if (validator.isInt(JSON.stringify(req.body.id))) {
     databaseManager.countProducts(JSON.stringify(req.body.id), function (count) {
@@ -130,7 +132,7 @@ router.post("/", function (req, res) {
   }
 });
 
-
+// Route for delete /api/products/:id (Delete a specific product)
 router.delete("/:id", function (req, res) {
   let id = req.params.id;
 
@@ -146,6 +148,7 @@ router.delete("/:id", function (req, res) {
   })
 });
 
+// Route for delete /api/products (Delete all products)
 router.delete("/", function (req, res) {
   databaseManager.deleteAllProducts(function () {
     return res.status(204).send("All products were removed.").end()
