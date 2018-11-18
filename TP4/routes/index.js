@@ -32,7 +32,7 @@ router.get("/contact", (req, res) => {
 
 router.get("/panier", (req, res) => {
   databaseManager.getAllProductsBasedOnShoppingCart(req.session.order, function (order) {
-    res.render("panier", { title: "OnlineShop - Panier", shoppingCartCount: utilities.getShoppingCartCount(req.session.order), order : order, fPrice : utilities.formatPrice, containsItems : (order.length > 0) });
+    res.render("panier", { title: "OnlineShop - Panier", shoppingCartCount: utilities.getShoppingCartCount(req.session.order), order : order, fPrice : utilities.formatPrice, total: utilities.getTotalShoppingCartPrice(order), containsItems : (order.length > 0) });
   })
 
 });

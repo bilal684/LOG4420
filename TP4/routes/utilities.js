@@ -72,6 +72,16 @@ const utilities = {
 
   formatPrice : (price) => {
     return price.toFixed(2).replace(".", ",")
+  },
+
+  getTotalShoppingCartPrice : (shoppingCart) => {
+
+    let total = 0
+    for(let p of shoppingCart)
+    {
+      total += p.quantity * p.price
+    }
+    return total
   }
 
 }

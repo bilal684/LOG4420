@@ -34,8 +34,7 @@ block content
                                 td.price #{fPrice(val['price'] * val['quantity'])} $
                 p.shopping-cart-total
                     | Total:
-                    - function getTotal() { var total = 0; for(let p of order) { total += p.quantity * p.price }; return total }
-                    strong#total-amount #{fPrice(getTotal())} $
+                    strong#total-amount #{fPrice(total)} $
                 a.btn.pull-right(href='/commande')
                     | Commander
                     i.fa.fa-angle-double-right
