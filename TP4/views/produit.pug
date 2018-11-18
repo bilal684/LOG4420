@@ -3,7 +3,7 @@ extends layout
 
 block content
     article
-        h1#product-name Produit
+        h1#product-name #{product.name}
         .row
             .col
                 img#product-image(alt='product', src='/assets/img/' + product.image)
@@ -25,5 +25,5 @@ block content
                         |   Ajouter
                 p
                     | Prix: 
-                    strong#product-price #{product.price}
+                    strong#product-price #{fPrice(product.price)} $
         #dialog.dialog Le produit a été ajouté au panier.

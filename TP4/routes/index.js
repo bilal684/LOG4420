@@ -22,7 +22,7 @@ router.get('/produits', function(req, res, next) {
 
 router.get('/produits/:id', function(req, res, next) {
     databaseManager.findProductById(req.params.id, function(prod) {
-      res.render('produit', { title: "OnlineShop - Produit", name:"produits", product : prod, shoppingCartCount: utilities.getShoppingCartCount(req.session.order) })
+      res.render('produit', { title: "OnlineShop - Produit", name:"produits", product : prod, shoppingCartCount: utilities.getShoppingCartCount(req.session.order), fPrice : utilities.formatPrice })
     })
 });
 
@@ -32,7 +32,7 @@ router.get("/contact", (req, res) => {
 
 router.get("/panier", (req, res) => {
   databaseManager.getAllProductsBasedOnShoppingCart(req.session.order, function (order) {
-    res.render("panier", { title: "OnlineShop - Panier", shoppingCartCount: utilities.getShoppingCartCount(req.session.order), order : order, fPrice : utilities.formatPrice });
+    res.render("panier", { title: "OnlineShop - Panier", shoppingCartCount: utilities.getShoppingCartCount(req.session.order), order : order, fPrice : utilities.formatPrice, containsItems : (order.length > 0) });
   })
 
 });
