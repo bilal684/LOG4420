@@ -1,6 +1,7 @@
 let utilities = require("./utilities")
 let mongoose = require("mongoose")
 const Product = mongoose.model("Product")
+const Order = mongoose.model("Order")
 const databaseManager = {
 
   findAllProducts: (callback) => {
@@ -66,6 +67,13 @@ const databaseManager = {
     {
       callback(allProductInfo)
     }
+  },
+
+  getLatestPlacedOrderByFirstAndLastName : (firstName, lastName, callback) => {
+    Order.findOne({'firstName' : firstName, 'lastName' : lastName}, ['id'], {sort :{id : -1}}, function(err, order)
+    {
+      callback(order)
+    })
   }
 }
 

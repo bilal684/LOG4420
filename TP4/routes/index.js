@@ -42,12 +42,9 @@ router.get("/commande", (req, res) => {
 });
 
 router.post("/confirmation", (req, res) => {
-  res.render("confirmation", { title: "OnlineShop - Confirmation", shoppingCartCount: utilities.getShoppingCartCount(req.session.order), firstName : req.body["first-name"], lastName : req.body["last-name"]});
+  databaseManager.getLatestPlacedOrderByFirstAndLastName(req.body["first-name"], req.body["last-name"], function(order) {
+    res.render("confirmation", { title: "OnlineShop - Confirmation", shoppingCartCount: utilities.getShoppingCartCount(req.session.order), firstName : req.body["first-name"], lastName : req.body["last-name"], orderId : order.id})
+  });
 });
-
-/*function formatPrice(price)
-{
-    return price.toFixed(2).replace(".", ",") + " $"
-}*/
 
 module.exports = router
