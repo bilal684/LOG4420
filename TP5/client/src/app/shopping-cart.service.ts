@@ -2,7 +2,7 @@ import {Injectable, EventEmitter} from '@angular/core'
 import { Http, RequestOptions, Headers } from '@angular/http';
 import {Config} from './config'
 
-export class shoppingCartProduct {
+export class ShoppingCartProduct {
     id : number
     name : string
     price : number
