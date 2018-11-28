@@ -1,5 +1,6 @@
 import {Injectable, EventEmitter} from '@angular/core'
-import { HttpClient } from '@angular/common/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
+import {Config} from './config'
 
 export class shoppingCartProduct {
     id : number
@@ -12,11 +13,17 @@ export class shoppingCartProduct {
 @Injectable()
 export class ShoppingCartService {
 
-    constructor(private http : HttpClient){}
+    constructor(private http : Http){}
 
-    static uri = 'http://localhost:3000/api/shopping-cart'
+    static uri = Config.apiUrl + '/shopping-cart'
 
     badgeUpdateEvent = new EventEmitter()
+
+    options():RequestOptions{
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        const options = new RequestOptions({ headers: headers, withCredentials: true });
+        return options;
+    }
 
     updateBadge()
     {
@@ -31,38 +38,38 @@ export class ShoppingCartService {
    */
     private static handleError(error: any): Promise<any> {
         console.error('An error occurred', error);
-        return Promise.reject(error.feedbackMessage || error);
+        return Promise.reject(error.feedbackMessage || error)
     }
 
     getShoppingCart() : Promise<any> {
-        return this.http.get(ShoppingCartService.uri)
-        .toPromise()
-        .then(prods => prods as Array<{productId : number, quantity:number}>)
-        .catch(ShoppingCartService.handleError)
+        return this.http.get(ShoppingCartService.uri, this.options())
+            .toPromise()
+            .then(products => products.json() as Array<{productId: number, quantity:number}>)
+            .catch(ShoppingCartService.handleError);
     }
 
     addToCart(productId : number, quantity : number) {
         return this.http.post(ShoppingCartService.uri, JSON.stringify({
             productId: productId,
             quantity : quantity
-        }))
+        }), this.options())
     }
 
     updateProductQuantity(productId : number, quantity : number)
     {
         return this.http.put(ShoppingCartService.uri + '/' + productId, JSON.stringify({
             quantity : quantity
-        }))
+        }), this.options())
     }
 
     removeProduct(productId : number)
     {
-        return this.http.delete(ShoppingCartService.uri + '/' + productId)
+        return this.http.delete(ShoppingCartService.uri + '/' + productId, this.options())
     }
 
     removeAllProducts()
     {
-        return this.http.delete(ShoppingCartService.uri)
+        return this.http.delete(ShoppingCartService.uri, this.options())
     }
 
 }

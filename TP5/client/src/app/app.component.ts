@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ShoppingCartService } from './shopping-cart.service';
 
 /**
  * Defines the main component of the application.
@@ -14,5 +15,31 @@ export class AppComponent {
     'Bilal Itani',
     'Said Hmani'
   ];
+
+  badge:number = 0;
+
+  constructor(private shoppingCartService : ShoppingCartService){}
+
+  ngOnInit()
+  {
+    this.updateCount()
+    this.shoppingCartService.badgeUpdateEvent.subscribe(() => {
+      this.updateCount()
+    })
+  }
+
+  updateCount() {
+    this.shoppingCartService.getShoppingCart().then(prods =>{
+      this.badge = 0
+      console.log(prods)
+      if(prods.length > 0)
+      {
+        prods.forEach(p => {
+          this.badge = this.badge + p.quantity
+        })
+      }
+    })
+  }
+
 
 }
